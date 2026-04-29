@@ -239,7 +239,7 @@ router.get('/pricing', (req, res) => {
         {
           name: 'Free',
           price: 0,
-          period: 'forever',
+          period: 'limited',
           features: [
             '5 total AI requests',
             'Basic AI generators',
@@ -264,7 +264,7 @@ router.get('/pricing', (req, res) => {
         {
           name: 'Enterprise',
           price: 99,
-          period: '3 months',
+          period: '5 months',
           features: [
             'Unlimited AI requests',
             'Everything in Pro',

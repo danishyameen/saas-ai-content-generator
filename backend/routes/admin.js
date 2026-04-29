@@ -299,10 +299,10 @@ router.put('/payments/:id/approve', async (req, res) => {
 
     if (payment.plan === 'pro') {
       user.requestLimit = 100;
-      user.planExpiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days
+      user.planExpiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days (1 month)
     } else if (payment.plan === 'enterprise') {
       user.requestLimit = 999999;
-      user.planExpiresAt = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000); // 90 days
+      user.planExpiresAt = new Date(Date.now() + 150 * 24 * 60 * 60 * 1000); // 150 days (5 months)
     }
 
     await user.save();
