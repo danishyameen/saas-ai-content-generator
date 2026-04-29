@@ -40,11 +40,16 @@ const admin = (req, res, next) => {
 const checkUsage = async (req, res, next) => {
   const user = await User.findById(req.user._id);
   if (!user.canMakeRequest()) {
+    let message = 'Limit reached. Upgrade your plan for more access.';
+    if (user.plan !== 'free' && user.planExpiresAt && new Date() > user.planExpiresAt) {
+      message = 'Your plan has expired. Please renew to continue.';
+    }
+
     return res.status(429).json({
       success: false,
-      message: 'Daily limit reached. Upgrade to Pro for unlimited access.',
-      limit: 5,
-      used: user.usageToday,
+      message,
+      limit: user.requestLimit,
+      used: user.totalAIRequests,
       upgradeUrl: '/pricing',
     });
   }

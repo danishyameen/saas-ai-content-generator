@@ -110,7 +110,7 @@ router.post('/marketing-campaign', protect, checkUsage, [
     if (!user.canMakeRequest()) {
       return res.status(429).json({
         success: false,
-        message: 'Daily limit reached. Upgrade to Pro for unlimited access.',
+        message: 'Limit reached. Upgrade your plan for more access.',
       });
     }
 
@@ -127,6 +127,66 @@ router.post('/marketing-campaign', protect, checkUsage, [
     });
 
     res.json({ success: true, data: result });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+// @route   POST /api/ai/generate-images
+// @desc    Generate product images
+// @access  Private
+router.post('/generate-images', protect, checkUsage, [
+  body('prompt').trim().notEmpty().withMessage('Prompt is required'),
+], async (req, res) => {
+  try {
+    const { prompt } = req.body;
+    const user = await User.findById(req.user._id);
+
+    const images = await AIService.generateImages(prompt, 1, user.companyDetails);
+
+    user.incrementUsage();
+    await user.save();
+
+    await AIRequest.create({
+      user: user._id,
+      type: 'image-generation',
+      prompt,
+      response: images,
+    });
+
+    res.json({ success: true, data: images });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+// @route   POST /api/ai/generate-logo
+// @desc    Generate company logo
+// @access  Private
+router.post('/generate-logo', protect, checkUsage, [
+  body('brandName').trim().notEmpty().withMessage('Brand name is required'),
+], async (req, res) => {
+  try {
+    const { brandName, industry } = req.body;
+    const user = await User.findById(req.user._id);
+
+    const logoUrl = await AIService.generateLogo(brandName, industry);
+
+    user.incrementUsage();
+    // Auto-save logo to user profile if requested
+    if (req.body.autoSave) {
+      user.companyDetails.logo = logoUrl;
+    }
+    await user.save();
+
+    await AIRequest.create({
+      user: user._id,
+      type: 'logo-generation',
+      prompt: brandName,
+      response: logoUrl,
+    });
+
+    res.json({ success: true, data: logoUrl });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }

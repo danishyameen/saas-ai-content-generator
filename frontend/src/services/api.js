@@ -38,6 +38,9 @@ export const authAPI = {
   getMe: () => api.get('/auth/me'),
   updateProfile: (data) => api.put('/auth/profile', data),
   changePassword: (data) => api.put('/auth/change-password', data),
+  forgotPassword: (data) => api.post('/auth/forgot-password', data),
+  verifyOTP: (data) => api.post('/auth/verify-otp', data),
+  resetPassword: (data) => api.post('/auth/reset-password', data),
 };
 
 // AI API
@@ -50,6 +53,8 @@ export const aiAPI = {
   generateCompetitorAnalysis: (data) => api.post('/ai/competitor-analysis', data),
   generateMarketingCampaign: (data) => api.post('/ai/marketing-campaign', data),
   getTemplates: () => api.get('/ai/templates'),
+  generateImages: (data) => api.post('/ai/generate-images', data),
+  generateLogo: (data) => api.post('/ai/generate-logo', data),
   getHistory: (params) => api.get('/ai/history', { params }),
   deleteHistory: (id) => api.delete(`/ai/history/${id}`),
 };

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Check, X, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
+import { Check, X, ChevronLeft, ChevronRight, Loader2, Eye } from 'lucide-react';
 import { adminAPI } from '../../services/api';
 import toast from 'react-hot-toast';
 
@@ -10,6 +10,7 @@ export default function AdminPayments() {
   const [totalPages, setTotalPages] = useState(1);
   const [filterStatus, setFilterStatus] = useState('');
   const [filterMethod, setFilterMethod] = useState('');
+  const [selectedProof, setSelectedProof] = useState(null);
 
   const fetchPayments = async () => {
     setLoading(true);
@@ -92,7 +93,7 @@ export default function AdminPayments() {
             {payments.map((payment) => (
               <div key={payment._id} className="card">
                 <div className="flex items-center justify-between">
-                  <div>
+                  <div className="flex-1">
                     <div className="flex items-center gap-3 mb-1">
                       <p className="font-medium">
                         {payment.user?.name || 'Unknown'}
@@ -110,8 +111,17 @@ export default function AdminPayments() {
                       {payment.plan} • {new Date(payment.createdAt).toLocaleDateString()}
                     </p>
                     {payment.jazzcashTransactionId && (
-                      <p className="text-xs text-dark-500 mt-1">
+                      <p className="text-xs text-dark-500 mt-1 flex items-center gap-2">
                         Transaction ID: {payment.jazzcashTransactionId}
+                        {payment.jazzcashProofImage && (
+                          <button
+                            onClick={() => setSelectedProof(payment.jazzcashProofImage)}
+                            className="text-primary-400 hover:text-primary-300 flex items-center gap-1"
+                          >
+                            <Eye size={12} />
+                            View Proof
+                          </button>
+                        )}
                       </p>
                     )}
                     {payment.adminNotes && (
@@ -167,6 +177,21 @@ export default function AdminPayments() {
             </div>
           )}
         </>
+      )}
+
+      {/* Proof Modal */}
+      {selectedProof && (
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-[100] p-4" onClick={() => setSelectedProof(null)}>
+          <div className="max-w-4xl max-h-[90vh] overflow-auto">
+            <img src={selectedProof} alt="Payment Proof" className="rounded-lg shadow-2xl" />
+          </div>
+          <button
+            onClick={() => setSelectedProof(null)}
+            className="absolute top-4 right-4 text-white hover:text-gray-300"
+          >
+            <X size={32} />
+          </button>
+        </div>
       )}
     </div>
   );

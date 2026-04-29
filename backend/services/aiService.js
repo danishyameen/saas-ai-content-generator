@@ -5,6 +5,10 @@ const groq = new OpenAI({
   baseURL: 'https://api.groq.com/openai/v1',
 });
 
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
 const AI_PROMPTS = {
   'product-generator': (input) => `
 You are an expert product description writer.
@@ -243,6 +247,47 @@ Make each template fill-in-the-blank style with placeholders.
     } catch (error) {
       console.error('Template Generation Error:', error);
       throw new Error(`Template generation failed: ${error.message}`);
+    }
+  }
+
+  async generateImages(productInfo, count = 4, companyDetails = null) {
+    try {
+      let brandingPrompt = '';
+      if (companyDetails && companyDetails.name) {
+        brandingPrompt = ` The image MUST include the company branding for "${companyDetails.name}".`;
+        if (companyDetails.website) brandingPrompt += ` Website: ${companyDetails.website}.`;
+        if (companyDetails.phone) brandingPrompt += ` Contact: ${companyDetails.phone}.`;
+        if (companyDetails.address) brandingPrompt += ` Address: ${companyDetails.address}.`;
+        brandingPrompt += ` Ensure the logo and details are integrated naturally onto the product or a subtle overlay in the corner.`;
+      }
+
+      const response = await openai.images.generate({
+        model: "dall-e-3",
+        prompt: `High-quality professional product photography of: ${productInfo}.${brandingPrompt} Commercial style, clean background, 4k resolution.`,
+        n: 1,
+        size: "1024x1024",
+      });
+
+      return [response.data[0].url];
+    } catch (error) {
+      console.error('AI Image Generation Error:', error);
+      throw new Error(`Image generation failed: ${error.message}`);
+    }
+  }
+
+  async generateLogo(brandName, industry = 'tech') {
+    try {
+      const response = await openai.images.generate({
+        model: "dall-e-3",
+        prompt: `A modern, professional, minimalist logo for a brand named "${brandName}" in the ${industry} industry. Vector style, flat design, white background, high contrast.`,
+        n: 1,
+        size: "1024x1024",
+      });
+
+      return response.data[0].url;
+    } catch (error) {
+      console.error('AI Logo Generation Error:', error);
+      throw new Error(`Logo generation failed: ${error.message}`);
     }
   }
 }

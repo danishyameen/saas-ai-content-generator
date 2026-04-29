@@ -6,6 +6,7 @@ import useAuthStore from './store/authStore';
 import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import ForgotPassword from './pages/ForgotPassword';
 
 // Dashboard Layout
 import DashboardLayout from './components/DashboardLayout';
@@ -82,6 +83,7 @@ function App() {
           path="/register"
           element={isAuthenticated ? <Navigate to="/dashboard" /> : <Register />}
         />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
 
         {/* Protected Dashboard Routes */}
         <Route

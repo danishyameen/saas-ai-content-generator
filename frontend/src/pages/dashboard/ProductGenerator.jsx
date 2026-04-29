@@ -12,6 +12,7 @@ export default function ProductGenerator() {
       apiFunction={aiAPI.generateProduct}
       placeholder="Describe your product. Include features, benefits, target audience, and any specific details..."
       examplePrompt="A premium wireless noise-canceling headphone with 40-hour battery life, active noise cancellation, comfortable memory foam ear cushions, and Bluetooth 5.0. Target audience: professionals and travelers who value quality audio experience."
+      isProduct={true}
     />
   );
 }

@@ -296,6 +296,15 @@ router.put('/payments/:id/approve', async (req, res) => {
     // Upgrade user plan
     const user = await User.findById(payment.user._id);
     user.plan = payment.plan;
+
+    if (payment.plan === 'pro') {
+      user.requestLimit = 100;
+      user.planExpiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days
+    } else if (payment.plan === 'enterprise') {
+      user.requestLimit = 999999;
+      user.planExpiresAt = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000); // 90 days
+    }
+
     await user.save();
 
     // Update affiliate earnings

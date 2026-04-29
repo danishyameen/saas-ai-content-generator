@@ -12,10 +12,10 @@ const plans = [
   {
     id: 'pro',
     name: 'Pro',
-    price: 9,
+    price: 20,
     period: 'month',
     features: [
-      'Unlimited AI requests',
+      '100 AI requests',
       'All AI generators',
       'Priority support',
       'Marketing campaigns',
@@ -26,14 +26,14 @@ const plans = [
     id: 'enterprise',
     name: 'Enterprise',
     price: 99,
-    period: 'month',
+    period: '3 months',
     features: [
+      'Unlimited AI requests',
       'Everything in Pro',
       'API access',
       'Custom AI training',
       'Dedicated account manager',
       'Team collaboration',
-      'White-label option',
     ],
   },
 ];
@@ -78,12 +78,23 @@ export default function Billing() {
     try {
       await paymentsAPI.submitJazzCash(jazzcashForm);
       toast.success('Payment submitted for verification');
-      setJazzcashForm({ transactionId: '', plan: 'pro' });
+      setJazzcashForm({ transactionId: '', plan: 'pro', proofImage: '' });
       setShowJazzCash(false);
     } catch (error) {
       toast.error(error.response?.data?.message || 'Failed to submit payment');
     } finally {
       setLoading(null);
+    }
+  };
+
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setJazzcashForm({ ...jazzcashForm, proofImage: reader.result });
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -186,9 +197,9 @@ export default function Billing() {
             <div className="mb-4 p-3 bg-dark-900 rounded-lg text-sm">
               <p className="font-medium mb-2">Payment Instructions:</p>
               <ol className="list-decimal list-inside space-y-1 text-dark-300">
-                <li>Send ${plans.find(p => p.id === jazzcashForm.plan)?.price} to JazzCash: 0300-1234567</li>
-                <li>Enter the Transaction ID below</li>
-                <li>Wait for admin approval (usually within 24 hours)</li>
+                <li>Send ${plans.find(p => p.id === jazzcashForm.plan)?.price} to JazzCash: +923132942320</li>
+                <li>Take a screenshot of the confirmation</li>
+                <li>Enter the Transaction ID below and upload the proof</li>
               </ol>
             </div>
             <form onSubmit={handleJazzCashSubmit} className="space-y-4">
@@ -199,8 +210,8 @@ export default function Billing() {
                   onChange={(e) => setJazzcashForm({ ...jazzcashForm, plan: e.target.value })}
                   className="input w-full"
                 >
-                  <option value="pro">Pro - $9/month</option>
-                  <option value="enterprise">Enterprise - $99/month</option>
+                  <option value="pro">Pro - $20/month</option>
+                  <option value="enterprise">Enterprise - $99/3 months</option>
                 </select>
               </div>
               <div>
@@ -211,6 +222,16 @@ export default function Billing() {
                   onChange={(e) => setJazzcashForm({ ...jazzcashForm, transactionId: e.target.value })}
                   className="input w-full"
                   placeholder="Enter JazzCash transaction ID"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-2">Payment Slip (Image)</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileUpload}
+                  className="input w-full"
                   required
                 />
               </div>

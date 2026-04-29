@@ -18,7 +18,7 @@ const useAuthStore = create((set) => ({
       return data;
     } catch (error) {
       set({ error: error.response?.data?.message || 'Login failed', loading: false });
-      throw error;
+      throw error; // full error throw karo taake Login.jsx errorType read kar sake
     }
   },
 

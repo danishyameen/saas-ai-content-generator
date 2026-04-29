@@ -130,7 +130,7 @@ router.post('/stripe/webhook', express.raw({ type: 'application/json' }), async 
           await Payment.create({
             user: userId,
             method: 'stripe',
-            amount: plan === 'enterprise' ? 99 : 9,
+            amount: plan === 'enterprise' ? 99 : 20,
             plan,
             status: 'completed',
             stripeSubscriptionId: session.subscription,
@@ -192,7 +192,7 @@ router.post('/jazzcash/submit', protect, async (req, res) => {
       return res.status(400).json({ success: false, message: 'Transaction ID is required' });
     }
 
-    const amount = plan === 'enterprise' ? 99 : 9;
+    const amount = plan === 'enterprise' ? 99 : 20;
 
     await Payment.create({
       user: user._id,
@@ -241,7 +241,7 @@ router.get('/pricing', (req, res) => {
           price: 0,
           period: 'forever',
           features: [
-            '5 AI requests per day',
+            '5 total AI requests',
             'Basic AI generators',
             'Email support',
           ],
@@ -249,10 +249,10 @@ router.get('/pricing', (req, res) => {
         },
         {
           name: 'Pro',
-          price: 9,
+          price: 20,
           period: 'month',
           features: [
-            'Unlimited AI requests',
+            '100 AI requests',
             'All AI generators',
             'Priority support',
             'Marketing campaigns',
@@ -264,14 +264,14 @@ router.get('/pricing', (req, res) => {
         {
           name: 'Enterprise',
           price: 99,
-          period: 'month',
+          period: '3 months',
           features: [
+            'Unlimited AI requests',
             'Everything in Pro',
             'API access',
             'Custom AI training',
             'Dedicated account manager',
             'Team collaboration',
-            'White-label option',
           ],
           cta: 'Contact Sales',
         },

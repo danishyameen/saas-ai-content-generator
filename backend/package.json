@@ -18,9 +18,11 @@
     "express-rate-limit": "^7.1.5",
     "express-validator": "^7.0.1",
     "helmet": "^7.1.0",
-    "jsonwebtoken": "^9.0.2",
+    "jsonwebtoken": "^9.0.3",
     "mongoose": "^8.0.3",
     "morgan": "^1.10.0",
+    "nodemailer": "^8.0.7",
+    "nodemailer-express-handlebars": "^7.0.0",
     "openai": "^6.34.0",
     "stripe": "^14.10.0"
   },

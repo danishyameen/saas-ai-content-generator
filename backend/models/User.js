@@ -47,9 +47,24 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  requestLimit: {
+    type: Number,
+    default: 5,
+  },
+  planExpiresAt: {
+    type: Date,
+    default: null,
+  },
   usageDate: {
     type: Date,
     default: Date.now,
+  },
+  companyDetails: {
+    name: { type: String, default: '' },
+    address: { type: String, default: '' },
+    website: { type: String, default: '' },
+    phone: { type: String, default: '' },
+    logo: { type: String, default: '' }, // URL or Base64
   },
   totalAIRequests: {
     type: Number,
@@ -70,6 +85,16 @@ const userSchema = new mongoose.Schema({
   referralEarnings: {
     type: Number,
     default: 0,
+  },
+  resetPasswordOTP: {
+    type: String,
+    default: null,
+    select: false,
+  },
+  resetPasswordOTPExpires: {
+    type: Date,
+    default: null,
+    select: false,
   },
   createdAt: {
     type: Date,
@@ -109,7 +134,17 @@ userSchema.methods.resetUsage = function () {
 userSchema.methods.canMakeRequest = function () {
   this.resetUsage();
   if (this.isBanned) return false;
-  if (this.plan === 'free') return this.usageToday < 5;
+
+  // Check if plan is expired (only for pro/enterprise)
+  if (this.plan !== 'free' && this.planExpiresAt && new Date() > this.planExpiresAt) {
+    return false;
+  }
+
+  // Check usage against request limit
+  if (this.totalAIRequests >= this.requestLimit) {
+    return false;
+  }
+
   return true;
 };
 
