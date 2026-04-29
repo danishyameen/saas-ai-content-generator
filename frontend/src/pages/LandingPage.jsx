@@ -26,7 +26,7 @@ export default function LandingPage() {
               <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center">
                 <Sparkles className="text-white" size={20} />
               </div>
-              <span className="text-white font-bold text-lg">AI Business Generator</span>
+              <span className="text-white font-bold text-lg">GeniFai</span>
             </div>
             <div className="hidden md:flex items-center gap-6">
               <a href="#features" className="text-dark-300 hover:text-white transition-colors">Features</a>
@@ -44,7 +44,7 @@ export default function LandingPage() {
         <div className="max-w-5xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-600/20 rounded-full mb-6">
             <Zap size={16} className="text-primary-400" />
-            <span className="text-primary-400 text-sm font-medium">Powered by Google Gemini AI</span>
+            <span className="text-primary-400 text-sm font-medium">Powered by GeniFai AI</span>
           </div>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
             Build Your Business
@@ -294,14 +294,14 @@ export default function LandingPage() {
               <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center">
                 <Sparkles className="text-white" size={20} />
               </div>
-              <span className="text-white font-bold">AI Business Generator</span>
+              <span className="text-white font-bold">GeniFai</span>
             </div>
             <div className="flex items-center gap-6 text-dark-400 text-sm">
               <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
               <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
               <a href="#" className="hover:text-white transition-colors">Contact</a>
             </div>
-            <p className="text-dark-400 text-sm">© 2026 AI Business Generator. All rights reserved.</p>
+            <p className="text-dark-400 text-sm">© 2026 GeniFai. All rights reserved.</p>
           </div>
         </div>
       </footer>
