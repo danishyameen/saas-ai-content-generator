@@ -26,7 +26,7 @@ const plans = [
     id: 'enterprise',
     name: 'Enterprise',
     price: 99,
-    period: '3 months',
+    period: '5 months',
     features: [
       'Unlimited AI requests',
       'Everything in Pro',
@@ -211,7 +211,7 @@ export default function Billing() {
                   className="input w-full"
                 >
                   <option value="pro">Pro - $20/month</option>
-                  <option value="enterprise">Enterprise - $99/3 months</option>
+                  <option value="enterprise">Enterprise - $99/5 months</option>
                 </select>
               </div>
               <div>
