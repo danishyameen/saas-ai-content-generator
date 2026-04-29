@@ -190,11 +190,11 @@ export default function LandingPage() {
               <h3 className="text-xl font-semibold mb-2">Pro</h3>
               <div className="mb-4">
                 <span className="text-4xl font-bold">$9</span>
-                <span className="text-dark-400">/month</span>
+                <span className="text-dark-400">/3 months</span>
               </div>
               <ul className="space-y-3 mb-6">
                 {[
-                  'Unlimited AI requests',
+                  '100 AI requests',
                   'All generators',
                   'Priority support',
                   'Marketing campaigns',
@@ -214,16 +214,16 @@ export default function LandingPage() {
               <h3 className="text-xl font-semibold mb-2">Enterprise</h3>
               <div className="mb-4">
                 <span className="text-4xl font-bold">$99</span>
-                <span className="text-dark-400">/month</span>
+                <span className="text-dark-400">/5 months</span>
               </div>
               <ul className="space-y-3 mb-6">
                 {[
+                  'Unlimited AI requests',
                   'Everything in Pro',
                   'API access',
                   'Custom AI training',
                   'Dedicated account manager',
                   'Team collaboration',
-                  'White-label option',
                 ].map((f, i) => (
                   <li key={i} className="flex items-center gap-2 text-dark-300">
                     <Check size={16} className="text-green-400" />

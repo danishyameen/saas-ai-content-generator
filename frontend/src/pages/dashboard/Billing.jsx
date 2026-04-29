@@ -12,8 +12,8 @@ const plans = [
   {
     id: 'pro',
     name: 'Pro',
-    price: 20,
-    period: 'month',
+    price: 9,
+    period: '3 months',
     features: [
       '100 AI requests',
       'All AI generators',
@@ -210,7 +210,7 @@ export default function Billing() {
                   onChange={(e) => setJazzcashForm({ ...jazzcashForm, plan: e.target.value })}
                   className="input w-full"
                 >
-                  <option value="pro">Pro - $20/month</option>
+                  <option value="pro">Pro - $9/3 months</option>
                   <option value="enterprise">Enterprise - $99/5 months</option>
                 </select>
               </div>
