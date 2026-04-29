@@ -169,7 +169,7 @@ export default function LandingPage() {
               <h3 className="text-xl font-semibold mb-2">Free</h3>
               <div className="mb-4">
                 <span className="text-4xl font-bold">$0</span>
-                <span className="text-dark-400">/forever</span>
+                <span className="text-dark-400">/limited</span>
               </div>
               <ul className="space-y-3 mb-6">
                 {['5 AI requests per day', 'Basic generators', 'Email support'].map((f, i) => (
@@ -189,8 +189,8 @@ export default function LandingPage() {
               </div>
               <h3 className="text-xl font-semibold mb-2">Pro</h3>
               <div className="mb-4">
-                <span className="text-4xl font-bold">$9</span>
-                <span className="text-dark-400">/3 months</span>
+                <span className="text-4xl font-bold">$20</span>
+                <span className="text-dark-400">/month</span>
               </div>
               <ul className="space-y-3 mb-6">
                 {[
