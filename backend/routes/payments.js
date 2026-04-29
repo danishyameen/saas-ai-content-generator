@@ -66,8 +66,12 @@ router.post('/stripe/portal', protect, async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
 
+    // If manual payment or no stripe customer, we don't have a portal
     if (!user.stripeCustomerId) {
-      return res.status(400).json({ success: false, message: 'No Stripe customer found' });
+      return res.status(400).json({
+        success: false,
+        message: 'No active Stripe subscription found. If you paid via JazzCash, please contact support for plan changes.'
+      });
     }
 
     const session = await stripe.billingPortal.sessions.create({
@@ -77,6 +81,7 @@ router.post('/stripe/portal', protect, async (req, res) => {
 
     res.json({ success: true, url: session.url });
   } catch (error) {
+    console.error('Stripe Portal Error:', error);
     res.status(500).json({ success: false, message: error.message });
   }
 });

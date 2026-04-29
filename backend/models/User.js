@@ -140,8 +140,12 @@ userSchema.methods.canMakeRequest = function () {
     return false;
   }
 
-  // Check usage against request limit
-  if (this.totalAIRequests >= this.requestLimit) {
+  // Check usage against daily limit based on plan
+  let dailyLimit = 5; // Default for free
+  if (this.plan === 'pro') dailyLimit = 100;
+  if (this.plan === 'enterprise') dailyLimit = 999999;
+
+  if (this.usageToday >= dailyLimit) {
     return false;
   }
 

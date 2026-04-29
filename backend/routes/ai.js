@@ -47,7 +47,7 @@ const processAIRequest = async (req, res, type) => {
       data: result.data,
       usage: {
         used: user.usageToday,
-        limit: user.plan === 'free' ? 5 : 'unlimited',
+        limit: user.plan === 'free' ? 5 : (user.plan === 'pro' ? 100 : 'unlimited'),
       },
     });
   } catch (error) {
@@ -142,7 +142,7 @@ router.post('/generate-images', protect, checkUsage, [
     const { prompt } = req.body;
     const user = await User.findById(req.user._id);
 
-    const images = await AIService.generateImages(prompt, 1, user.companyDetails);
+    const images = await AIService.generateImages(prompt, 4, user.companyDetails);
 
     user.incrementUsage();
     await user.save();
@@ -161,7 +161,7 @@ router.post('/generate-images', protect, checkUsage, [
 });
 
 // @route   POST /api/ai/generate-logo
-// @desc    Generate company logo
+// @desc    Generate company logo options
 // @access  Private
 router.post('/generate-logo', protect, checkUsage, [
   body('brandName').trim().notEmpty().withMessage('Brand name is required'),
@@ -170,23 +170,19 @@ router.post('/generate-logo', protect, checkUsage, [
     const { brandName, industry } = req.body;
     const user = await User.findById(req.user._id);
 
-    const logoUrl = await AIService.generateLogo(brandName, industry);
+    const logoOptions = await AIService.generateLogo(brandName, industry);
 
     user.incrementUsage();
-    // Auto-save logo to user profile if requested
-    if (req.body.autoSave) {
-      user.companyDetails.logo = logoUrl;
-    }
     await user.save();
 
     await AIRequest.create({
       user: user._id,
       type: 'logo-generation',
       prompt: brandName,
-      response: logoUrl,
+      response: logoOptions,
     });
 
-    res.json({ success: true, data: logoUrl });
+    res.json({ success: true, data: logoOptions });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }

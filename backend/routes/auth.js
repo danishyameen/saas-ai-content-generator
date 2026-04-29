@@ -241,14 +241,16 @@ router.post('/forgot-password', [
     // Send email
     try {
       const { sendOTP } = require('../services/emailService');
+      console.log(`Attempting to send OTP to: ${user.email}`);
       await sendOTP(user.email, otp);
+      console.log(`OTP successfully sent to: ${user.email}`);
       res.json({ success: true, message: 'OTP sent to email' });
     } catch (err) {
       user.resetPasswordOTP = undefined;
       user.resetPasswordOTPExpires = undefined;
       await user.save();
-      console.log(err);
-      return res.status(500).json({ success: false, message: 'Email could not be sent' });
+      console.error('CRITICAL: OTP Send Failure:', err);
+      return res.status(500).json({ success: false, message: `Email could not be sent: ${err.message}` });
     }
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });

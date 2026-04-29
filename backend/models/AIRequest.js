@@ -8,7 +8,17 @@ const aiRequestSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: ['product-generator', 'seo-generator', 'ads-generator', 'business-ideas', 'social-content', 'competitor-analysis'],
+    enum: [
+      'product-generator',
+      'seo-generator',
+      'ads-generator',
+      'business-ideas',
+      'social-content',
+      'competitor-analysis',
+      'logo-generation',
+      'image-generation',
+      'marketing-campaign'
+    ],
     required: true,
   },
   prompt: {
