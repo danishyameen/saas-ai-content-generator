@@ -10,6 +10,7 @@ import ForgotPassword from './pages/ForgotPassword';
 
 // Dashboard Layout
 import DashboardLayout from './components/DashboardLayout';
+import InstallPWA from './components/InstallPWA';
 
 // Dashboard Pages
 import DashboardHome from './pages/dashboard/DashboardHome';
@@ -72,6 +73,7 @@ function App() {
           },
         }}
       />
+      <InstallPWA />
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<LandingPage />} />
