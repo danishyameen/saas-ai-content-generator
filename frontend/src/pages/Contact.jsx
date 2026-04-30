@@ -201,16 +201,10 @@ export default function Contact() {
             {/* Map */}
             <motion.div variants={item} className="card p-0 overflow-hidden">
               <div className="aspect-video w-full">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.5267891234567!2d67.0099!3d24.8607!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjTCsDUxJzM4LjUiTiA2N8KwMDAnMzUuNiJF!5e0!3m2!1sen!2s!4v1234567890"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Genifai Location"
-                  className="w-full h-full"
+                <img
+                  src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&h=600&fit=crop&q=80"
+                  alt="Karachi South Location Map"
+                  className="w-full h-full object-cover"
                 />
               </div>
             </motion.div>
