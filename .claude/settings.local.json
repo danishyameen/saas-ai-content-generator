@@ -11,7 +11,8 @@
       "Bash(cd frontend:*)",
       "Bash(npm install:*)",
       "Bash(find:*)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(cd backend:*)"
     ]
   }
 }

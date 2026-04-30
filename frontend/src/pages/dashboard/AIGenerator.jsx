@@ -73,14 +73,20 @@ export default function AIGenerator({ title, description, icon: Icon, color, api
     toast.success('Downloaded!');
   };
 
-  const downloadImage = (imgUrl, index) => {
-    const a = document.createElement('a');
-    a.href = imgUrl;
-    a.download = `product-image-${index + 1}.png`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    toast.success('Image download started!');
+  const downloadImage = (imgUrl, index, format = 'png') => {
+    try {
+      const a = document.createElement('a');
+      a.href = imgUrl;
+      a.download = `product-image-${index + 1}.${format}`;
+      a.target = '_blank';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      toast.success(`Image downloaded as ${format.toUpperCase()}!`);
+    } catch (error) {
+      toast.error('Failed to download image');
+      console.error('Download error:', error);
+    }
   };
 
   return (
@@ -290,15 +296,26 @@ export default function AIGenerator({ title, description, icon: Icon, color, api
                         className="group relative"
                       >
                         <img src={img} alt="Generated product" className="rounded-lg w-full h-auto shadow-lg" />
-                        <motion.button
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.9 }}
-                          onClick={() => downloadImage(img, i)}
-                          className="absolute bottom-2 right-2 p-2 bg-dark-900/80 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary-600"
-                          title="Download Image"
-                        >
-                          <Download size={16} className="text-white" />
-                        </motion.button>
+                        <div className="absolute bottom-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <motion.button
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={() => downloadImage(img, i, 'png')}
+                            className="p-2 bg-dark-900/80 rounded-full hover:bg-primary-600"
+                            title="Download as PNG"
+                          >
+                            <Download size={16} className="text-white" />
+                          </motion.button>
+                          <motion.button
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={() => downloadImage(img, i, 'jpg')}
+                            className="p-2 bg-dark-900/80 rounded-full hover:bg-green-600"
+                            title="Download as JPG"
+                          >
+                            <Download size={16} className="text-white" />
+                          </motion.button>
+                        </div>
                       </motion.div>
                     ))}
                   </div>

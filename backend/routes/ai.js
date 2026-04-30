@@ -22,7 +22,7 @@ const processAIRequest = async (req, res, type) => {
       return res.status(429).json({
         success: false,
         message: 'Daily limit reached. Upgrade to Pro for unlimited access.',
-        limit: 5,
+        limit: user.plan === 'free' ? 10 : (user.plan === 'pro' ? 100 : 999999),
         used: user.usageToday,
       });
     }
@@ -47,7 +47,7 @@ const processAIRequest = async (req, res, type) => {
       data: result.data,
       usage: {
         used: user.usageToday,
-        limit: user.plan === 'free' ? 5 : (user.plan === 'pro' ? 100 : 'unlimited'),
+        limit: user.plan === 'free' ? 10 : (user.plan === 'pro' ? 100 : 'unlimited'),
       },
     });
   } catch (error) {

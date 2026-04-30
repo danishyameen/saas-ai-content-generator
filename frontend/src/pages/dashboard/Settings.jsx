@@ -79,14 +79,21 @@ export default function Settings() {
     }
   };
 
-  const downloadLogo = () => {
+  const downloadLogo = (format = 'png') => {
     if (!companyDetails.logo) return;
-    const a = document.createElement('a');
-    a.href = companyDetails.logo;
-    a.download = `${companyDetails.name || 'brand'}-logo.png`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    try {
+      const a = document.createElement('a');
+      a.href = companyDetails.logo;
+      a.download = `${companyDetails.name || 'brand'}-logo.${format}`;
+      a.target = '_blank';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      toast.success(`Logo downloaded as ${format.toUpperCase()}!`);
+    } catch (error) {
+      toast.error('Failed to download logo');
+      console.error('Download error:', error);
+    }
   };
 
   const handlePasswordChange = async (e) => {
@@ -241,14 +248,26 @@ export default function Settings() {
                 {companyDetails.logo ? (
                   <>
                     <img src={companyDetails.logo} alt="Brand Logo" className="w-full h-full object-contain" />
-                    <motion.button
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      onClick={downloadLogo}
-                      className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity"
-                    >
-                      <Download size={32} className="text-white" />
-                    </motion.button>
+                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center gap-3 transition-opacity">
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={() => downloadLogo('png')}
+                        className="p-3 bg-primary-600 rounded-full hover:bg-primary-700"
+                        title="Download as PNG"
+                      >
+                        <Download size={24} className="text-white" />
+                      </motion.button>
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={() => downloadLogo('jpg')}
+                        className="p-3 bg-green-600 rounded-full hover:bg-green-700"
+                        title="Download as JPG"
+                      >
+                        <Download size={24} className="text-white" />
+                      </motion.button>
+                    </div>
                   </>
                 ) : (
                   <ImageIcon size={48} className="text-dark-500" />
