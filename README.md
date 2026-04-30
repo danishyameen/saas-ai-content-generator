@@ -6,6 +6,16 @@
 
 Genifai is a comprehensive AI-powered SaaS platform that helps businesses and individuals generate high-quality content using advanced artificial intelligence. From product descriptions to marketing campaigns, Genifai streamlines content creation with powerful AI tools.
 
+**Live Platform Features:**
+- 🎯 10 Free AI Requests for Every New User
+- 🎨 AI Logo Generation with 4 Options
+- 🖼️ AI Image Generation for Products
+- 📱 Progressive Web App (Installable)
+- ✨ Beautiful Animations Throughout
+- 🔐 Secure Authentication with OTP
+- 💳 Multiple Payment Options
+- 👑 Admin Dashboard for Platform Management
+
 ## ✨ Features
 
 ### 🎯 AI Content Generators
@@ -373,6 +383,12 @@ This project is proprietary software. All rights reserved.
 - **Phone**: +92 313 2942320
 - **Address**: Bhorapir Aslam Road, Karachi South, Sindh, Pakistan
 - **Business Hours**: Monday-Friday: 9:00 AM - 6:00 PM (PKT)
+- **Website**: [Contact Page](/contact) - Includes contact form and location image
+
+### Quick Links
+- [Privacy Policy](/privacy) - Comprehensive privacy and data protection information
+- [Terms of Service](/terms) - Detailed terms and conditions
+- [Contact Us](/contact) - Get in touch with our team
 
 ## 🙏 Acknowledgments
 
@@ -388,15 +404,22 @@ This project is proprietary software. All rights reserved.
 - Initial release
 - 7 AI content generators
 - User authentication and authorization
-- Subscription plans (Free, Pro, Enterprise)
+- Subscription plans (Free: 10 requests/day, Pro: 100 requests/day, Enterprise: Unlimited)
 - Payment integration (Stripe, JazzCash)
-- Admin dashboard
-- Affiliate program
-- PWA support
-- Email OTP system
-- Logo and image generation
-- Beautiful animations with Framer Motion
-- Privacy Policy, Terms of Service, and Contact pages
+- Admin dashboard with full platform management
+- Affiliate program with referral tracking
+- PWA support with offline capabilities
+- Email OTP system with Resend API
+- Logo generation (4 AI-generated options)
+- Image generation with OpenAI and Unsplash fallback
+- Beautiful animations with Framer Motion throughout all pages
+- Privacy Policy, Terms of Service, and Contact pages with working footer links
+- Contact page with business information and location image
+- Responsive design for all devices
+- Admin account with unlimited access
+- Manual payment approval workflow
+- Request history and usage tracking
+- Company branding management
 
 ---
 
