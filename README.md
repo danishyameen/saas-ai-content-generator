@@ -18,7 +18,7 @@ Genifai is a comprehensive AI-powered SaaS platform that helps businesses and in
 - **Marketing Campaign** - Plan and create comprehensive marketing campaigns
 
 ### 💎 Subscription Plans
-- **Free Plan** - 10 AI requests per day
+- **Free Plan** - 10 AI requests per day (Get free 10 AI requests)
 - **Pro Plan** - 100 AI requests per day for 30 days ($20/month)
 - **Enterprise Plan** - Unlimited AI requests for 90 days ($50/3 months)
 

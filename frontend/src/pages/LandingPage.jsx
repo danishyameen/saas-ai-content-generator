@@ -492,9 +492,9 @@ export default function LandingPage() {
               <span className="text-white font-black text-xl">Genifai</span>
             </div>
             <div className="flex items-center gap-8 text-dark-400 text-sm font-bold uppercase tracking-widest">
-              <a href="#" className="hover:text-white transition-colors">Privacy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms</a>
-              <a href="#" className="hover:text-white transition-colors">Contact</a>
+              <a href="/privacy" className="hover:text-white transition-colors">Privacy</a>
+              <a href="/terms" className="hover:text-white transition-colors">Terms</a>
+              <a href="/contact" className="hover:text-white transition-colors">Contact</a>
             </div>
             <p className="text-dark-500 text-sm font-medium italic">© 2026 Genifai. Built with AI for Builders.</p>
           </div>
