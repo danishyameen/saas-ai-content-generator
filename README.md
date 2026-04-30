@@ -8,13 +8,15 @@ Genifai is a comprehensive AI-powered SaaS platform that helps businesses and in
 
 **Live Platform Features:**
 - 🎯 10 Free AI Requests for Every New User
-- 🎨 AI Logo Generation with 4 Options
-- 🖼️ AI Image Generation for Products
-- 📱 Progressive Web App (Installable)
-- ✨ Beautiful Animations Throughout
-- 🔐 Secure Authentication with OTP
-- 💳 Multiple Payment Options
-- 👑 Admin Dashboard for Platform Management
+- 🎨 AI Logo Generation with 4 Options (PNG/JPG Download)
+- 🖼️ AI Image Generation for Products (PNG/JPG Download)
+- 📥 Dual Format Downloads - All images and logos in PNG or JPG
+- 📱 Progressive Web App (Installable on Any Device)
+- ✨ Beautiful Framer Motion Animations Throughout
+- 🔐 Secure Authentication with OTP Email System
+- 💳 Multiple Payment Options (Stripe + JazzCash)
+- 👑 Comprehensive Admin Dashboard
+- 🤝 Affiliate Program with Earnings Tracking
 
 ## ✨ Features
 
@@ -33,13 +35,28 @@ Genifai is a comprehensive AI-powered SaaS platform that helps businesses and in
 - **Enterprise Plan** - Unlimited AI requests for 90 days ($50/3 months)
 
 ### 🎨 Advanced Features
-- **AI Logo Generation** - Generate 4 logo options based on your brand name with PNG/JPG download
-- **Image Generation/Upload** - AI-powered product image generation with PNG/JPG download options
-- **Company Branding** - Manage company details, logo, and branding
+- **AI Logo Generation** - Generate 4 unique logo options based on your brand name
+  - Download in PNG format (blue button)
+  - Download in JPG format (green button)
+  - Hover over logo to reveal download options
+  - Automatic file naming with brand name
+- **Image Generation/Upload** - AI-powered product image generation
+  - Generate 4 high-quality product images
+  - Download each image in PNG or JPG format
+  - Dual download buttons appear on hover
+  - Manual image upload option available
+- **Company Branding** - Complete branding management system
+  - Upload or generate company logo
+  - Manage company details (name, address, website, phone)
+  - Logo preview with download options
 - **Request History** - Track all your AI generation history
 - **Affiliate Program** - Earn commissions by referring new users
 - **Admin Dashboard** - Comprehensive admin panel for platform management
-- **Download Options** - Download all generated images and logos in PNG or JPG format
+- **Download Options** - All generated content downloadable
+  - Images: PNG/JPG formats
+  - Logos: PNG/JPG formats
+  - Text content: TXT format
+  - Color-coded buttons for easy identification
 
 ### 🔐 Security & Authentication
 - Secure user authentication with JWT tokens
@@ -222,29 +239,36 @@ vercel --prod
 - Visit the homepage and click "Get Started"
 - Register with your name, email, and password
 - Login with your credentials
+- Get 10 free AI requests immediately
 
 #### 2. Using AI Generators
 - Navigate to any generator from the dashboard sidebar
 - Enter your prompt or use the example prompt
 - Click "Generate Content" to create AI-powered content
-- Copy or download the generated content
+- Copy or download the generated content as TXT file
 
 #### 3. Product Generator with Images
 - Generate product description
 - Choose to upload your own image or generate one with AI
-- AI will generate 4 image options
-- Download your favorite images
+- AI will generate 4 high-quality image options
+- **Hover over any image** to see download buttons:
+  - **Blue button** = Download as PNG
+  - **Green button** = Download as JPG
+- Click your preferred format to download
 
 #### 4. Logo Generation
 - Go to Settings page
 - Enter your company/brand name
-- Click "AI Generate" under Brand Logo
+- Click "AI Generate" under Brand Logo section
 - Select from 4 AI-generated logo options
-- Save your settings
+- **Hover over selected logo** to see download buttons:
+  - **Blue button** = Download as PNG
+  - **Green button** = Download as JPG
+- Save your settings to keep the logo
 
 #### 5. Upgrading Your Plan
 - Go to Billing page
-- Choose Pro or Enterprise plan
+- Choose Pro (100 requests/day) or Enterprise (Unlimited) plan
 - Complete payment via Stripe or JazzCash
 - Wait for admin approval (24-48 hours)
 - Your plan will be activated automatically
@@ -253,7 +277,7 @@ vercel --prod
 - Go to Affiliate Dashboard
 - Copy your unique referral code
 - Share with friends and earn commissions
-- Track your referrals and earnings
+- Track your referrals and earnings in real-time
 
 ### For Admins
 
