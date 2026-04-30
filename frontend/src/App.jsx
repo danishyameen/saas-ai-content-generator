@@ -1,12 +1,28 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import { AnimatePresence, motion } from 'framer-motion';
 import useAuthStore from './store/authStore';
+
+// Page Wrapper for Animations
+const PageWrapper = ({ children }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 10 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -10 }}
+    transition={{ duration: 0.3, ease: "easeOut" }}
+  >
+    {children}
+  </motion.div>
+);
 
 // Pages
 import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
+import Contact from './pages/Contact';
 
 // Dashboard Layout
 import DashboardLayout from './components/DashboardLayout';
@@ -59,6 +75,7 @@ const ProtectedRoute = ({ children, adminOnly = false }) => {
 
 function App() {
   const { isAuthenticated } = useAuthStore();
+  const location = useLocation();
 
   return (
     <>
@@ -74,62 +91,67 @@ function App() {
         }}
       />
       <InstallPWA />
-      <Routes>
-        {/* Public Routes */}
-        <Route path="/" element={<LandingPage />} />
-        <Route
-          path="/login"
-          element={isAuthenticated ? <Navigate to="/dashboard" /> : <Login />}
-        />
-        <Route
-          path="/register"
-          element={isAuthenticated ? <Navigate to="/dashboard" /> : <Register />}
-        />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          {/* Public Routes */}
+          <Route path="/" element={<PageWrapper><LandingPage /></PageWrapper>} />
+          <Route
+            path="/login"
+            element={isAuthenticated ? <Navigate to="/dashboard" /> : <PageWrapper><Login /></PageWrapper>}
+          />
+          <Route
+            path="/register"
+            element={isAuthenticated ? <Navigate to="/dashboard" /> : <PageWrapper><Register /></PageWrapper>}
+          />
+          <Route path="/forgot-password" element={<PageWrapper><ForgotPassword /></PageWrapper>} />
+          <Route path="/privacy" element={<PageWrapper><PrivacyPolicy /></PageWrapper>} />
+          <Route path="/terms" element={<PageWrapper><TermsOfService /></PageWrapper>} />
+          <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
 
-        {/* Protected Dashboard Routes */}
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <DashboardLayout />
-            </ProtectedRoute>
-          }
-        >
-          <Route index element={<DashboardHome />} />
-          <Route path="product" element={<ProductGenerator />} />
-          <Route path="seo" element={<SEOGenerator />} />
-          <Route path="ads" element={<AdsGenerator />} />
-          <Route path="business-ideas" element={<BusinessIdeas />} />
-          <Route path="social" element={<SocialContent />} />
-          <Route path="competitor" element={<CompetitorAnalysis />} />
-          <Route path="campaign" element={<MarketingCampaign />} />
-          <Route path="history" element={<History />} />
-          <Route path="billing" element={<Billing />} />
-          <Route path="affiliate" element={<AffiliateDashboard />} />
-          <Route path="settings" element={<Settings />} />
-        </Route>
+          {/* Protected Dashboard Routes */}
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <DashboardLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<PageWrapper><DashboardHome /></PageWrapper>} />
+            <Route path="product" element={<PageWrapper><ProductGenerator /></PageWrapper>} />
+            <Route path="seo" element={<PageWrapper><SEOGenerator /></PageWrapper>} />
+            <Route path="ads" element={<PageWrapper><AdsGenerator /></PageWrapper>} />
+            <Route path="business-ideas" element={<PageWrapper><BusinessIdeas /></PageWrapper>} />
+            <Route path="social" element={<PageWrapper><SocialContent /></PageWrapper>} />
+            <Route path="competitor" element={<PageWrapper><CompetitorAnalysis /></PageWrapper>} />
+            <Route path="campaign" element={<PageWrapper><MarketingCampaign /></PageWrapper>} />
+            <Route path="history" element={<PageWrapper><History /></PageWrapper>} />
+            <Route path="billing" element={<PageWrapper><Billing /></PageWrapper>} />
+            <Route path="affiliate" element={<PageWrapper><AffiliateDashboard /></PageWrapper>} />
+            <Route path="settings" element={<PageWrapper><Settings /></PageWrapper>} />
+          </Route>
 
-        {/* Admin Routes */}
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute adminOnly>
-              <DashboardLayout />
-            </ProtectedRoute>
-          }
-        >
-          <Route index element={<AdminDashboard />} />
-          <Route path="users" element={<AdminUsers />} />
-          <Route path="payments" element={<AdminPayments />} />
-          <Route path="ai-requests" element={<AdminAIRequests />} />
-          <Route path="affiliates" element={<AdminAffiliates />} />
-          <Route path="logs" element={<AdminLogs />} />
-        </Route>
+          {/* Admin Routes */}
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute adminOnly>
+                <DashboardLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<PageWrapper><AdminDashboard /></PageWrapper>} />
+            <Route path="users" element={<PageWrapper><AdminUsers /></PageWrapper>} />
+            <Route path="payments" element={<PageWrapper><AdminPayments /></PageWrapper>} />
+            <Route path="ai-requests" element={<PageWrapper><AdminAIRequests /></PageWrapper>} />
+            <Route path="affiliates" element={<PageWrapper><AdminAffiliates /></PageWrapper>} />
+            <Route path="logs" element={<PageWrapper><AdminLogs /></PageWrapper>} />
+          </Route>
 
-        {/* 404 */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+          {/* 404 */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </AnimatePresence>
     </>
   );
 }

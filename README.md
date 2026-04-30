@@ -1,77 +1,405 @@
-# AI Business Generator SaaS
+# Genifai - AI-Powered Content Generation Platform
 
-A production-ready AI SaaS platform that generates product descriptions, SEO content, marketing ads, business ideas, and social media content.
+![Genifai Logo](frontend/public/pwa-512x512.png)
 
-## Tech Stack
-- **Frontend:** React + Vite + Tailwind CSS
-- **Backend:** Node.js + Express
-- **Database:** MongoDB Atlas
-- **AI:** Google Gemini API
-- **Payments:** Stripe + JazzCash
+## 🚀 Overview
 
-## Quick Start
+Genifai is a comprehensive AI-powered SaaS platform that helps businesses and individuals generate high-quality content using advanced artificial intelligence. From product descriptions to marketing campaigns, Genifai streamlines content creation with powerful AI tools.
 
-### Backend
-```bash
-cd backend
-npm install
-cp .env.example .env
-# Fill in your .env variables
-npm run dev
-```
+## ✨ Features
+
+### 🎯 AI Content Generators
+- **Product Description Generator** - Create compelling, conversion-optimized product descriptions with AI-generated images
+- **SEO Content Generator** - Generate SEO-optimized content for better search rankings
+- **Ads Generator** - Create high-converting advertisement copy
+- **Business Ideas Generator** - Get innovative business concepts and strategies
+- **Social Media Content** - Generate engaging social media posts
+- **Competitor Analysis** - Analyze your competition with AI insights
+- **Marketing Campaign** - Plan and create comprehensive marketing campaigns
+
+### 💎 Subscription Plans
+- **Free Plan** - 5 AI requests per day
+- **Pro Plan** - 100 AI requests per day for 30 days ($20/month)
+- **Enterprise Plan** - Unlimited AI requests for 90 days ($50/3 months)
+
+### 🎨 Advanced Features
+- **AI Logo Generation** - Generate 4 logo options based on your brand name
+- **Image Generation/Upload** - AI-powered product image generation or manual upload
+- **Company Branding** - Manage company details, logo, and branding
+- **Request History** - Track all your AI generation history
+- **Affiliate Program** - Earn commissions by referring new users
+- **Admin Dashboard** - Comprehensive admin panel for platform management
+
+### 🔐 Security & Authentication
+- Secure user authentication with JWT tokens
+- Password reset via OTP (One-Time Password) sent to email
+- Encrypted password storage with bcrypt
+- Role-based access control (User/Admin)
+
+### 📱 Progressive Web App (PWA)
+- Install as a native app on any device
+- Offline support with service workers
+- Home screen installation prompt
+- Fast loading and responsive design
+
+### 💳 Payment Integration
+- Stripe payment gateway integration
+- JazzCash payment support (Pakistan)
+- Manual payment approval by admin
+- Automatic plan activation after approval
+
+### 📊 Admin Panel Features
+- User management (view, ban, upgrade users)
+- Payment approval system
+- AI request monitoring
+- Affiliate management
+- Activity logs
+- Revenue tracking
+- Platform statistics and analytics
+
+## 🛠️ Technology Stack
 
 ### Frontend
+- **React 18** - Modern UI library
+- **Vite** - Fast build tool and dev server
+- **Tailwind CSS** - Utility-first CSS framework
+- **Framer Motion** - Beautiful animations
+- **React Router** - Client-side routing
+- **Zustand** - State management
+- **React Hot Toast** - Toast notifications
+- **Lucide React** - Icon library
+
+### Backend
+- **Node.js** - JavaScript runtime
+- **Express.js** - Web application framework
+- **MongoDB** - NoSQL database
+- **Mongoose** - MongoDB object modeling
+- **JWT** - JSON Web Tokens for authentication
+- **Bcrypt** - Password hashing
+- **Nodemailer** - Email sending
+- **Resend API** - Email service for production
+- **OpenAI API** - AI content generation
+- **Unsplash API** - Image generation fallback
+- **Stripe** - Payment processing
+
+## 📦 Installation & Setup
+
+### Prerequisites
+- Node.js (v16 or higher)
+- MongoDB (local or Atlas)
+- npm or yarn package manager
+
+### Backend Setup
+
+1. Navigate to the backend directory:
+```bash
+cd backend
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Create a `.env` file in the backend directory with the following variables:
+```env
+PORT=5000
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+OPENAI_API_KEY=your_openai_api_key
+UNSPLASH_ACCESS_KEY=your_unsplash_access_key
+STRIPE_SECRET_KEY=your_stripe_secret_key
+EMAIL_USER=your_email@gmail.com
+EMAIL_PASS=your_gmail_app_password
+RESEND_API_KEY=your_resend_api_key
+FRONTEND_URL=http://localhost:5173
+```
+
+4. Start the backend server:
+```bash
+npm start
+```
+
+The backend will run on `http://localhost:5000`
+
+### Frontend Setup
+
+1. Navigate to the frontend directory:
 ```bash
 cd frontend
+```
+
+2. Install dependencies:
+```bash
 npm install
-cp .env.example .env
-# Fill in your .env variables
+```
+
+3. Create a `.env` file in the frontend directory:
+```env
+VITE_API_URL=http://localhost:5000/api
+```
+
+4. Start the development server:
+```bash
 npm run dev
 ```
 
-## Environment Variables
+The frontend will run on `http://localhost:5173`
 
-### Backend (.env)
-```
-PORT=5000
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/ai-saas
-JWT_SECRET=your-super-secret-jwt-key
-GEMINI_API_KEY=your-gemini-api-key
-STRIPE_SECRET_KEY=sk_test_your_stripe_secret
-STRIPE_WEBHOOK_SECRET=whsec_your_webhook_secret
-FRONTEND_URL=http://localhost:5173
-JAZZCASH_MERCHANT_ID=your_jazzcash_merchant_id
-JAZZCASH_PASSWORD=your_jazzcash_password
-JAZZCASH_HASH_KEY=your_jazzcash_hash_key
+### Building for Production
+
+#### Frontend Build
+```bash
+cd frontend
+npm run build
 ```
 
-### Frontend (.env)
+#### Backend Production
+```bash
+cd backend
+npm start
 ```
-VITE_API_URL=http://localhost:5000/api
-VITE_STRIPE_PUBLIC_KEY=pk_test_your_stripe_public
+
+## 🚀 Deployment
+
+### Vercel Deployment (Recommended for Frontend)
+
+1. Install Vercel CLI:
+```bash
+npm install -g vercel
 ```
 
-## Deployment
+2. Deploy frontend:
+```bash
+cd frontend
+vercel --prod
+```
 
-### MongoDB Atlas
-1. Create cluster at https://cloud.mongodb.com
-2. Create database user
-3. Whitelist 0.0.0.0/0 for IP access
-4. Get connection string
+3. Set environment variables in Vercel dashboard:
+   - `VITE_API_URL` - Your backend API URL
 
-### Backend (Render)
-1. Push code to GitHub
-2. Connect repo to Render
-3. Set environment variables
-4. Deploy
+### Backend Deployment Options
 
-### Frontend (Vercel)
-1. Push code to GitHub
-2. Connect repo to Vercel
-3. Set environment variables
-4. Deploy
+#### Option 1: Vercel (Serverless)
+- Deploy backend as serverless functions
+- Configure environment variables in Vercel dashboard
 
-## Pricing Plans
-- **Free:** 5 AI requests/day
-- **Pro:** $9/month - Unlimited
-- **Enterprise:** $99/month - Unlimited + Priority
+#### Option 2: Railway/Render/Heroku
+- Connect your GitHub repository
+- Set environment variables
+- Deploy with automatic builds
+
+### Environment Variables for Production
+
+**Backend (Vercel/Railway/Render):**
+- `MONGODB_URI` - MongoDB Atlas connection string
+- `JWT_SECRET` - Strong secret key
+- `OPENAI_API_KEY` - OpenAI API key
+- `UNSPLASH_ACCESS_KEY` - Unsplash API key
+- `STRIPE_SECRET_KEY` - Stripe secret key
+- `RESEND_API_KEY` - Resend API key (for email)
+- `FRONTEND_URL` - Your frontend URL
+
+**Frontend (Vercel):**
+- `VITE_API_URL` - Your backend API URL
+
+## 📖 Usage Guide
+
+### For Users
+
+#### 1. Registration & Login
+- Visit the homepage and click "Get Started"
+- Register with your name, email, and password
+- Login with your credentials
+
+#### 2. Using AI Generators
+- Navigate to any generator from the dashboard sidebar
+- Enter your prompt or use the example prompt
+- Click "Generate Content" to create AI-powered content
+- Copy or download the generated content
+
+#### 3. Product Generator with Images
+- Generate product description
+- Choose to upload your own image or generate one with AI
+- AI will generate 4 image options
+- Download your favorite images
+
+#### 4. Logo Generation
+- Go to Settings page
+- Enter your company/brand name
+- Click "AI Generate" under Brand Logo
+- Select from 4 AI-generated logo options
+- Save your settings
+
+#### 5. Upgrading Your Plan
+- Go to Billing page
+- Choose Pro or Enterprise plan
+- Complete payment via Stripe or JazzCash
+- Wait for admin approval (24-48 hours)
+- Your plan will be activated automatically
+
+#### 6. Affiliate Program
+- Go to Affiliate Dashboard
+- Copy your unique referral code
+- Share with friends and earn commissions
+- Track your referrals and earnings
+
+### For Admins
+
+#### 1. Accessing Admin Panel
+- Login with admin credentials
+- Click "Admin Panel" from user menu
+- Access admin-only features
+
+#### 2. Managing Users
+- View all registered users
+- Ban/unban users
+- Manually upgrade user plans
+- View user activity and statistics
+
+#### 3. Payment Approval
+- Go to Payments section
+- Review pending payments
+- Approve or reject payment requests
+- System automatically activates plans upon approval
+
+#### 4. Monitoring Platform
+- View platform statistics
+- Track AI request usage
+- Monitor revenue and growth
+- Review activity logs
+
+## 🎨 Features in Detail
+
+### AI Content Generation
+All generators use OpenAI's GPT models to create high-quality, contextual content based on your prompts. The system includes:
+- Smart prompt engineering for optimal results
+- Usage tracking and limits based on plan
+- Request history for all generations
+- Copy and download functionality
+
+### Image Generation System
+- **Primary**: OpenAI DALL-E 3 for AI image generation
+- **Fallback**: Unsplash API for high-quality stock images
+- **Upload**: Manual image upload support
+- **Multiple Options**: Generate 4 images per request
+
+### Email System
+- **Production**: Resend API (works on Vercel)
+- **Development**: Nodemailer with Gmail SMTP
+- **OTP System**: Secure 6-digit OTP for password reset
+- **Templates**: Professional HTML email templates
+
+### Payment Processing
+- **Stripe**: International credit/debit cards
+- **JazzCash**: Pakistan mobile wallet payments
+- **Manual Approval**: Admin reviews and approves payments
+- **Automatic Activation**: Plans activate after approval
+
+## 🔒 Security Features
+
+- JWT-based authentication
+- Password hashing with bcrypt (10 salt rounds)
+- HTTP-only cookies for token storage
+- CORS protection
+- Input validation and sanitization
+- Rate limiting on API endpoints
+- Secure password reset with OTP expiration
+- Role-based access control
+
+## 📱 PWA Features
+
+- **Installable**: Add to home screen on mobile and desktop
+- **Offline Support**: Service worker caching
+- **Fast Loading**: Optimized assets and lazy loading
+- **Responsive**: Works on all screen sizes
+- **App-like Experience**: Full-screen mode, splash screen
+
+## 🎯 API Endpoints
+
+### Authentication
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/login` - Login user
+- `POST /api/auth/forgot-password` - Request password reset OTP
+- `POST /api/auth/reset-password` - Reset password with OTP
+- `GET /api/auth/me` - Get current user
+- `PUT /api/auth/profile` - Update user profile
+- `PUT /api/auth/change-password` - Change password
+
+### AI Generation
+- `POST /api/ai/generate-product` - Generate product description
+- `POST /api/ai/generate-seo` - Generate SEO content
+- `POST /api/ai/generate-ads` - Generate ad copy
+- `POST /api/ai/generate-business-ideas` - Generate business ideas
+- `POST /api/ai/generate-social` - Generate social media content
+- `POST /api/ai/generate-competitor` - Generate competitor analysis
+- `POST /api/ai/generate-campaign` - Generate marketing campaign
+- `POST /api/ai/generate-logo` - Generate brand logos
+- `POST /api/ai/generate-images` - Generate product images
+- `GET /api/ai/history` - Get generation history
+
+### Payments
+- `POST /api/payments/create-checkout` - Create Stripe checkout
+- `POST /api/payments/jazzcash` - Submit JazzCash payment
+- `GET /api/payments/my-payments` - Get user payments
+
+### Admin
+- `GET /api/admin/stats` - Get platform statistics
+- `GET /api/admin/users` - Get all users
+- `PUT /api/admin/users/:id/ban` - Ban/unban user
+- `PUT /api/admin/users/:id/upgrade` - Upgrade user plan
+- `GET /api/admin/payments` - Get all payments
+- `PUT /api/admin/payments/:id/approve` - Approve payment
+- `GET /api/admin/ai-requests` - Get all AI requests
+- `GET /api/admin/affiliates` - Get affiliate data
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is proprietary software. All rights reserved.
+
+## 📞 Contact & Support
+
+- **Email**: support@genifai.com
+- **Phone**: +92 313 2942320
+- **Address**: Bhorapir Aslam Road, Karachi South, Sindh, Pakistan
+- **Business Hours**: Monday-Friday: 9:00 AM - 6:00 PM (PKT)
+
+## 🙏 Acknowledgments
+
+- OpenAI for GPT and DALL-E APIs
+- Unsplash for image API
+- Stripe for payment processing
+- Resend for email delivery
+- All open-source libraries used in this project
+
+## 📝 Changelog
+
+### Version 1.0.0 (April 2026)
+- Initial release
+- 7 AI content generators
+- User authentication and authorization
+- Subscription plans (Free, Pro, Enterprise)
+- Payment integration (Stripe, JazzCash)
+- Admin dashboard
+- Affiliate program
+- PWA support
+- Email OTP system
+- Logo and image generation
+- Beautiful animations with Framer Motion
+- Privacy Policy, Terms of Service, and Contact pages
+
+---
+
+**Built with ❤️ by the Genifai Team**
+
+For more information, visit our website or contact our support team.

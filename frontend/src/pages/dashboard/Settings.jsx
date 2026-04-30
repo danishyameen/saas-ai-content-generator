@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { User, Mail, Lock, Save, Building, Globe, MapPin, Phone, Image as ImageIcon, Loader2, Download } from 'lucide-react';
 import { authAPI, aiAPI } from '../../services/api';
 import useAuthStore from '../../store/authStore';
@@ -104,18 +105,33 @@ export default function Settings() {
   };
 
   return (
-    <div className="space-y-6 max-w-4xl">
-      <div className="flex items-center justify-between">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="space-y-6 max-w-4xl"
+    >
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.1 }}
+        className="flex items-center justify-between"
+      >
         <div>
           <h1 className="text-2xl font-bold mb-2">Settings</h1>
           <p className="text-dark-400">Manage your account and company branding</p>
         </div>
-      </div>
+      </motion.div>
 
       <div className="grid lg:grid-cols-2 gap-6">
         {/* Profile & Branding */}
         <div className="space-y-6">
-          <div className="card">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
+            className="card"
+          >
             <h3 className="font-semibold mb-4">Profile Information</h3>
             <form onSubmit={handleProfileUpdate} className="space-y-4">
               <div>
@@ -197,29 +213,42 @@ export default function Settings() {
                 </div>
               </div>
 
-              <button type="submit" disabled={loading} className="btn-primary w-full">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                type="submit"
+                disabled={loading}
+                className="btn-primary w-full"
+              >
                 {loading ? <Loader2 size={16} className="animate-spin mr-2 inline" /> : <Save size={16} className="inline mr-2" />}
                 Save All Settings
-              </button>
+              </motion.button>
             </form>
-          </div>
+          </motion.div>
         </div>
 
         {/* Logo Management */}
         <div className="space-y-6">
-          <div className="card">
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3 }}
+            className="card"
+          >
             <h3 className="font-semibold mb-4">Brand Logo</h3>
             <div className="space-y-4">
               <div className="aspect-square w-full bg-dark-900 rounded-lg border-2 border-dashed border-dark-700 flex items-center justify-center overflow-hidden relative group">
                 {companyDetails.logo ? (
                   <>
                     <img src={companyDetails.logo} alt="Brand Logo" className="w-full h-full object-contain" />
-                    <button
+                    <motion.button
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
                       onClick={downloadLogo}
                       className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity"
                     >
                       <Download size={32} className="text-white" />
-                    </button>
+                    </motion.button>
                   </>
                 ) : (
                   <ImageIcon size={48} className="text-dark-500" />
@@ -232,42 +261,61 @@ export default function Settings() {
                   Upload
                   <input type="file" className="hidden" accept="image/*" onChange={handleLogoUpload} />
                 </label>
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   onClick={handleGenerateLogo}
                   disabled={logoLoading}
                   className="btn-primary flex items-center justify-center gap-2"
                 >
                   {logoLoading ? <Loader2 size={16} className="animate-spin" /> : <ImageIcon size={16} />}
                   AI Generate
-                </button>
+                </motion.button>
               </div>
 
-              {generatedLogos.length > 0 && (
-                <div className="mt-4 p-4 bg-dark-800 rounded-xl border border-dark-700">
-                  <h4 className="text-sm font-medium mb-3 text-center">Choose a logo option:</h4>
-                  <div className="grid grid-cols-2 gap-3">
-                    {generatedLogos.map((url, i) => (
-                      <div
-                        key={i}
-                        onClick={() => selectLogo(url)}
-                        className="aspect-square bg-dark-900 rounded-lg border border-dark-700 overflow-hidden cursor-pointer hover:border-primary-500 transition-all group relative"
-                      >
-                        <img src={url} alt={`Option ${i+1}`} className="w-full h-full object-contain" />
-                        <div className="absolute inset-0 bg-primary-600/20 opacity-0 group-hover:opacity-100 flex items-center justify-center">
-                          <span className="text-xs font-bold text-white bg-primary-600 px-2 py-1 rounded">Select</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+              <AnimatePresence>
+                {generatedLogos.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="mt-4 p-4 bg-dark-800 rounded-xl border border-dark-700"
+                  >
+                    <h4 className="text-sm font-medium mb-3 text-center">Choose a logo option:</h4>
+                    <div className="grid grid-cols-2 gap-3">
+                      {generatedLogos.map((url, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: i * 0.1 }}
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => selectLogo(url)}
+                          className="aspect-square bg-dark-900 rounded-lg border border-dark-700 overflow-hidden cursor-pointer hover:border-primary-500 transition-all group relative"
+                        >
+                          <img src={url} alt={`Option ${i+1}`} className="w-full h-full object-contain" />
+                          <div className="absolute inset-0 bg-primary-600/20 opacity-0 group-hover:opacity-100 flex items-center justify-center">
+                            <span className="text-xs font-bold text-white bg-primary-600 px-2 py-1 rounded">Select</span>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
               <p className="text-xs text-dark-400 text-center">
                 Recommended: Square PNG with transparent background
               </p>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="card">
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.4 }}
+            className="card"
+          >
             <h3 className="font-semibold mb-4">Change Password</h3>
             <form onSubmit={handlePasswordChange} className="space-y-4">
               <div>
@@ -291,13 +339,19 @@ export default function Settings() {
                   minLength={6}
                 />
               </div>
-              <button type="submit" disabled={loading} className="btn-primary w-full">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                type="submit"
+                disabled={loading}
+                className="btn-primary w-full"
+              >
                 Change Password
-              </button>
+              </motion.button>
             </form>
-          </div>
+          </motion.div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
