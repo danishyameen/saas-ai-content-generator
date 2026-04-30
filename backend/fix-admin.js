@@ -8,21 +8,26 @@ const fixAdmin = async () => {
     await connectDB();
 
     // Delete old admin first
-    await mongoose.connection.collection('users').deleteMany({ email: 'admin@aibusinessgenerator.com' });
+    await mongoose.connection.collection('users').deleteMany({
+      $or: [
+        { email: 'admin@aibusinessgenerator.com' },
+        { email: 'danishyameennew@gmail.com' }
+      ]
+    });
 
     // Create fresh admin with properly hashed password
-    const hashedPassword = await bcrypt.hash('admin123456', 10);
+    const hashedPassword = await bcrypt.hash('karachi33@', 10);
 
     await mongoose.connection.collection('users').insertOne({
-      name: 'Admin User',
-      email: 'admin@aibusinessgenerator.com',
+      name: 'Danish Yameen',
+      email: 'danishyameennew@gmail.com',
       password: hashedPassword,
       role: 'admin',
       plan: 'enterprise',
       isBanned: false,
       usageToday: 0,
       totalAIRequests: 0,
-      referralCode: 'ADMIN001',
+      referralCode: 'ADMINDAN001',
       referralCount: 0,
       referralEarnings: 0,
       createdAt: new Date(),
@@ -31,8 +36,8 @@ const fixAdmin = async () => {
     });
 
     console.log('✅ Admin user fixed!');
-    console.log('Email: admin@aibusinessgenerator.com');
-    console.log('Password: admin123456');
+    console.log('Email: danishyameennew@gmail.com');
+    console.log('Password: karachi33@');
 
     process.exit(0);
   } catch (error) {
