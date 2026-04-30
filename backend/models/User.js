@@ -49,7 +49,7 @@ const userSchema = new mongoose.Schema({
   },
   requestLimit: {
     type: Number,
-    default: 5,
+    default: 10,
   },
   planExpiresAt: {
     type: Date,
@@ -144,7 +144,7 @@ userSchema.methods.canMakeRequest = function () {
   }
 
   // Check usage against daily limit based on plan
-  let dailyLimit = 5; // Default for free
+  let dailyLimit = 10; // Default for free
   if (this.plan === 'pro') dailyLimit = 100;
   if (this.plan === 'enterprise') dailyLimit = 999999;
 

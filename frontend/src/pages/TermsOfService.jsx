@@ -105,7 +105,7 @@ export default function TermsOfService() {
                 <h3 className="text-lg font-semibold mb-2 text-white">4.1 Plans</h3>
                 <p className="leading-relaxed mb-2">We offer the following subscription plans:</p>
                 <ul className="list-disc list-inside ml-4 space-y-1">
-                  <li><strong>Free Plan:</strong> 5 AI requests per day</li>
+                  <li><strong>Free Plan:</strong> 10 AI requests per day</li>
                   <li><strong>Pro Plan:</strong> 100 AI requests per day for 30 days ($20/month)</li>
                   <li><strong>Enterprise Plan:</strong> Unlimited AI requests for 90 days ($50/3 months)</li>
                 </ul>

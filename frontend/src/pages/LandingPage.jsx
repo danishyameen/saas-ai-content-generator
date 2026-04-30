@@ -122,7 +122,7 @@ export default function LandingPage() {
             transition={{ delay: 0.8 }}
             className="text-dark-500 mt-8 text-sm font-medium tracking-wide"
           >
-            No credit card required • 5 free AI requests per day
+            No credit card required • Get free 10 AI requests
           </motion.p>
         </div>
       </section>
@@ -306,7 +306,7 @@ export default function LandingPage() {
                 <span className="text-dark-500 font-bold">/limited</span>
               </div>
               <ul className="space-y-4 mb-10 flex-1">
-                {['5 AI requests per day', 'Basic AI generators', 'Community support', 'Standard speed'].map((f, i) => (
+                {['10 AI requests per day', 'Basic AI generators', 'Community support', 'Standard speed'].map((f, i) => (
                   <li key={i} className="flex items-center gap-3 text-dark-300 text-sm font-medium">
                     <Check size={18} className="text-green-500 shrink-0" />
                     {f}

@@ -31,7 +31,7 @@ const generators = [
 
 export default function DashboardHome() {
   const { user } = useAuthStore();
-  const [stats, setStats] = useState({ used: 0, limit: 5 });
+  const [stats, setStats] = useState({ used: 0, limit: 10 });
 
   useEffect(() => {
     // Fetch usage stats
@@ -39,7 +39,7 @@ export default function DashboardHome() {
       .then(({ data }) => {
         setStats({
           used: user?.usageToday || 0,
-          limit: user?.plan === 'free' ? 5 : (user?.plan === 'pro' ? 100 : 'unlimited'),
+          limit: user?.plan === 'free' ? 10 : (user?.plan === 'pro' ? 100 : 'unlimited'),
         });
       })
       .catch(() => {});
@@ -85,7 +85,7 @@ export default function DashboardHome() {
         <div className="w-full bg-dark-700 rounded-full h-2">
           <motion.div
             initial={{ width: 0 }}
-            animate={{ width: `${user?.plan === 'free' ? Math.min((stats.used / 5) * 100, 100) : (user?.plan === 'pro' ? Math.min((stats.used / 100) * 100, 100) : 100)}%` }}
+            animate={{ width: `${user?.plan === 'free' ? Math.min((stats.used / 10) * 100, 100) : (user?.plan === 'pro' ? Math.min((stats.used / 100) * 100, 100) : 100)}%` }}
             transition={{ duration: 1, ease: "easeOut" }}
             className="bg-gradient-to-r from-primary-500 to-purple-500 h-2 rounded-full"
           />
