@@ -211,22 +211,57 @@ vercel --prod
 #### Option 1: Vercel (Serverless)
 - Deploy backend as serverless functions
 - Configure environment variables in Vercel dashboard
+- **IMPORTANT**: Add `RESEND_API_KEY` for email functionality
 
 #### Option 2: Railway/Render/Heroku
 - Connect your GitHub repository
 - Set environment variables
 - Deploy with automatic builds
 
+### Critical Environment Variables
+
+**Must Have for Production:**
+- ✅ `MONGODB_URI` - Database connection
+- ✅ `JWT_SECRET` - Authentication security
+- ✅ `RESEND_API_KEY` - **Required for OTP emails on Vercel**
+- ✅ `GROQ_API_KEY` - AI content generation
+- ✅ `FRONTEND_URL` - CORS configuration
+
+**Optional but Recommended:**
+- `OPENAI_API_KEY` - For DALL-E image generation
+- `UNSPLASH_ACCESS_KEY` - Image generation fallback
+- `STRIPE_SECRET_KEY` - Payment processing
+
+### Troubleshooting
+
+**"Failed to send OTP" on Vercel:**
+- Cause: Missing `RESEND_API_KEY` environment variable
+- Solution: Add Resend API key to Vercel environment variables
+- Get key from: https://resend.com
+
+**Admin Login Issues:**
+- Run `node backend/fix-admin.js` to recreate admin account
+- Credentials: danishyameennew@gmail.com / karachi33@
+
 ### Environment Variables for Production
 
 **Backend (Vercel/Railway/Render):**
 - `MONGODB_URI` - MongoDB Atlas connection string
 - `JWT_SECRET` - Strong secret key
-- `OPENAI_API_KEY` - OpenAI API key
-- `UNSPLASH_ACCESS_KEY` - Unsplash API key
+- `OPENAI_API_KEY` - OpenAI API key (optional, for DALL-E image generation)
+- `GROQ_API_KEY` - Groq API key for AI content generation
+- `UNSPLASH_ACCESS_KEY` - Unsplash API key for image fallback
 - `STRIPE_SECRET_KEY` - Stripe secret key
-- `RESEND_API_KEY` - Resend API key (for email)
+- `RESEND_API_KEY` - **REQUIRED for production** - Resend API key for email (Vercel blocks SMTP)
+- `EMAIL_USER` - Gmail address (for localhost only)
+- `EMAIL_PASS` - Gmail app password (for localhost only)
 - `FRONTEND_URL` - Your frontend URL
+
+**Important for Vercel Deployment:**
+- ⚠️ **RESEND_API_KEY is required** for OTP emails to work on Vercel
+- Get free API key from https://resend.com
+- Without it, password reset OTP will fail with "Failed to send OTP"
+- Localhost uses Gmail SMTP (EMAIL_USER/EMAIL_PASS) which works fine
 
 **Frontend (Vercel):**
 - `VITE_API_URL` - Your backend API URL
@@ -335,6 +370,14 @@ All generators use OpenAI's GPT models to create high-quality, contextual conten
 - **Development**: Nodemailer with Gmail SMTP
 - **OTP System**: Secure 6-digit OTP for password reset
 - **Templates**: Professional HTML email templates
+- **Important**: Vercel blocks SMTP ports (465/587), so Resend API is required for production
+
+**Setting up Resend for Production:**
+1. Sign up at https://resend.com (free tier available)
+2. Get your API key from dashboard
+3. Add `RESEND_API_KEY` to Vercel environment variables
+4. Redeploy your application
+5. OTP emails will now work on production
 
 ### Payment Processing
 - **Stripe**: International credit/debit cards
@@ -409,9 +452,31 @@ Contributions are welcome! Please follow these steps:
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📄 License
+## 🔐 Admin Account
 
-This project is proprietary software. All rights reserved.
+### Default Admin Credentials:
+```
+Email: danishyameennew@gmail.com
+Password: karachi33@
+```
+
+**Admin Features:**
+- ✅ Unlimited AI requests (forever, no expiration)
+- ✅ No daily limits
+- ✅ Full admin panel access
+- ✅ User management (ban/unban, upgrade plans)
+- ✅ Payment approval system
+- ✅ Platform statistics and analytics
+- ✅ Revenue tracking
+- ✅ Activity logs monitoring
+
+**How to Access Admin Panel:**
+1. Login with admin credentials
+2. Click profile icon (top right)
+3. Select "Admin Panel" from dropdown
+4. Access all admin features
+
+**Note:** Admin account has permanent unlimited access to all platform features.
 
 ## 📞 Contact & Support
 
