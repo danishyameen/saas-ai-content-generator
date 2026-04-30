@@ -135,7 +135,10 @@ userSchema.methods.canMakeRequest = function () {
   this.resetUsage();
   if (this.isBanned) return false;
 
-  // Check if plan is expired (only for pro/enterprise)
+  // Admin has unlimited access forever
+  if (this.role === 'admin') return true;
+
+  // Check if plan is expired (only for pro/enterprise users who are not admins)
   if (this.plan !== 'free' && this.planExpiresAt && new Date() > this.planExpiresAt) {
     return false;
   }
