@@ -23,7 +23,7 @@ export default function DashboardHome() {
       .then(({ data }) => {
         setStats({
           used: user?.usageToday || 0,
-          limit: user?.plan === 'free' ? 5 : 'unlimited',
+          limit: user?.plan === 'free' ? 5 : (user?.plan === 'pro' ? 100 : 'unlimited'),
         });
       })
       .catch(() => {});
@@ -62,14 +62,14 @@ export default function DashboardHome() {
         <div className="w-full bg-dark-700 rounded-full h-2">
           <div
             className="bg-gradient-to-r from-primary-500 to-purple-500 h-2 rounded-full transition-all duration-300"
-            style={{ width: `${user?.plan === 'free' ? Math.min((stats.used / 5) * 100, 100) : 0}%` }}
+            style={{ width: `${user?.plan === 'free' ? Math.min((stats.used / 5) * 100, 100) : (user?.plan === 'pro' ? Math.min((stats.used / 100) * 100, 100) : 100)}%` }}
           />
         </div>
       </div>
 
       {/* Generators Grid */}
       <div>
-        <h2 className="text-xl font-semibold mb-4">AI Generators</h2>
+        <h2 className="text-xl font-semibold mb-4">Genifai Generators</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {generators.map((gen, i) => {
             const Icon = gen.icon;

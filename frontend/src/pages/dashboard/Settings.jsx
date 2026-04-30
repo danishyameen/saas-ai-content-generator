@@ -20,6 +20,7 @@ export default function Settings() {
   const [newPassword, setNewPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [logoLoading, setLogoLoading] = useState(false);
+  const [generatedLogos, setGeneratedLogos] = useState([]);
 
   const handleProfileUpdate = async (e) => {
     e.preventDefault();
@@ -45,18 +46,25 @@ export default function Settings() {
       return;
     }
     setLogoLoading(true);
+    setGeneratedLogos([]);
     try {
       const { data } = await aiAPI.generateLogo({
-        brandName: companyDetails.name,
-        autoSave: true
+        brandName: companyDetails.name
       });
-      setCompanyDetails({ ...companyDetails, logo: data.data });
-      toast.success('Brand logo generated and saved!');
+      setGeneratedLogos(data.data);
+      toast.success('AI generated 4 logo options for you!');
     } catch (error) {
-      toast.error('Logo generation failed');
+      const msg = error.response?.data?.message || 'Logo generation failed';
+      toast.error(msg);
     } finally {
       setLogoLoading(false);
     }
+  };
+
+  const selectLogo = (url) => {
+    setCompanyDetails({ ...companyDetails, logo: url });
+    setGeneratedLogos([]);
+    toast.success('Logo selected! Don\'t forget to save all settings.');
   };
 
   const handleLogoUpload = (e) => {
@@ -233,6 +241,26 @@ export default function Settings() {
                   AI Generate
                 </button>
               </div>
+
+              {generatedLogos.length > 0 && (
+                <div className="mt-4 p-4 bg-dark-800 rounded-xl border border-dark-700">
+                  <h4 className="text-sm font-medium mb-3 text-center">Choose a logo option:</h4>
+                  <div className="grid grid-cols-2 gap-3">
+                    {generatedLogos.map((url, i) => (
+                      <div
+                        key={i}
+                        onClick={() => selectLogo(url)}
+                        className="aspect-square bg-dark-900 rounded-lg border border-dark-700 overflow-hidden cursor-pointer hover:border-primary-500 transition-all group relative"
+                      >
+                        <img src={url} alt={`Option ${i+1}`} className="w-full h-full object-contain" />
+                        <div className="absolute inset-0 bg-primary-600/20 opacity-0 group-hover:opacity-100 flex items-center justify-center">
+                          <span className="text-xs font-bold text-white bg-primary-600 px-2 py-1 rounded">Select</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
               <p className="text-xs text-dark-400 text-center">
                 Recommended: Square PNG with transparent background
               </p>

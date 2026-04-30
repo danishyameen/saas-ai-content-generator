@@ -34,7 +34,7 @@ export default function Register() {
             <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center">
               <Sparkles className="text-white" size={24} />
             </div>
-            <span className="text-white font-bold text-xl">AI Generator</span>
+            <span className="text-white font-bold text-xl">Genifai</span>
           </Link>
           <h1 className="text-2xl font-bold mb-2">Create your account</h1>
           <p className="text-dark-400">Start generating with AI - it's free</p>

@@ -119,11 +119,18 @@ export default function Billing() {
           {user?.plan !== 'free' && (
             <button
               onClick={async () => {
+                if (!user?.stripeCustomerId) {
+                  setShowJazzCash(true);
+                  setJazzcashForm({ ...jazzcashForm, plan: user.plan });
+                  toast.success('Opening JazzCash portal for plan management');
+                  return;
+                }
                 try {
                   const { data } = await paymentsAPI.createStripePortal();
                   window.location.href = data.url;
-                } catch {
-                  toast.error('Failed to open billing portal');
+                } catch (error) {
+                  const msg = error.response?.data?.message || 'Failed to open billing portal';
+                  toast.error(msg);
                 }
               }}
               className="btn-outline text-sm"

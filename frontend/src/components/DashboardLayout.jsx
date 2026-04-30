@@ -76,7 +76,7 @@ export default function DashboardLayout() {
             <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-sm">AI</span>
             </div>
-            <span className="text-white font-bold">AI Generator</span>
+            <span className="text-white font-bold">Genifai</span>
           </Link>
           <button
             onClick={() => setSidebarOpen(false)}

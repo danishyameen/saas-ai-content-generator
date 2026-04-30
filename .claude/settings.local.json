@@ -8,7 +8,10 @@
       "Bash(git:*)",
       "Bash(cd:*)",
       "Bash(ls:*)",
-      "Bash(cd frontend:*)"
+      "Bash(cd frontend:*)",
+      "Bash(npm install:*)",
+      "Bash(find:*)",
+      "Bash(dir:*)"
     ]
   }
 }
