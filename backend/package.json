@@ -25,6 +25,7 @@
     "nodemailer": "^8.0.7",
     "nodemailer-express-handlebars": "^7.0.0",
     "openai": "^6.34.0",
+    "resend": "^6.12.2",
     "stripe": "^14.10.0"
   },
   "devDependencies": {
