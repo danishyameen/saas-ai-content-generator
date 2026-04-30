@@ -426,6 +426,9 @@ This project is proprietary software. All rights reserved.
 - [Terms of Service](/terms) - Detailed terms and conditions
 - [Contact Us](/contact) - Get in touch with our team
 
+**Footer Navigation:**
+All pages include footer links to Privacy Policy, Terms of Service, and Contact page for easy access.
+
 ## 🙏 Acknowledgments
 
 - OpenAI for GPT and DALL-E APIs
