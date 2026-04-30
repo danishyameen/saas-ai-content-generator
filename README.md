@@ -190,7 +190,24 @@ npm start
 
 ## 🚀 Deployment
 
-### Vercel Deployment (Recommended for Frontend)
+### Live Production URLs
+
+**Frontend (Genifai Platform):**
+- 🌐 **Main URL**: https://genifai-five.vercel.app
+- 🔗 Alternative: https://genifai-30z2a98be-danish-yameens-projects.vercel.app
+
+**Backend (API Server):**
+- 🌐 **Main URL**: https://backend-three-flax-82.vercel.app
+- 🔗 Alternative: https://backend-5lcnjhljx-danish-yameens-projects.vercel.app
+- 📡 API Endpoint: https://backend-three-flax-82.vercel.app/api
+
+**Admin Login:**
+- 📧 Email: danishyameennew@gmail.com
+- 🔑 Password: karachi33@
+
+### Vercel Deployment (Recommended)
+
+#### Frontend Deployment
 
 1. Install Vercel CLI:
 ```bash
@@ -203,12 +220,33 @@ cd frontend
 vercel --prod
 ```
 
-3. Set environment variables in Vercel dashboard:
-   - `VITE_API_URL` - Your backend API URL
+3. Set environment variables in Vercel:
+```bash
+vercel env add VITE_API_URL production
+# Enter: https://backend-three-flax-82.vercel.app/api
+```
+
+#### Backend Deployment
+
+1. Deploy backend:
+```bash
+cd backend
+vercel --prod
+```
+
+2. Set environment variables in Vercel dashboard or CLI:
+   - `MONGODB_URI` - MongoDB Atlas connection string
+   - `JWT_SECRET` - Strong secret key
+   - `GROQ_API_KEY` - Groq API key for AI content generation
+   - `RESEND_API_KEY` - **REQUIRED** - Resend API key for email (re_R2jUoYSz_6q4DQjpe17wpYpmfP6gsSaK2)
+   - `FRONTEND_URL` - Your frontend URL (https://genifai-five.vercel.app)
+   - `STRIPE_SECRET_KEY` - Stripe secret key (optional)
+   - `OPENAI_API_KEY` - OpenAI API key (optional, for DALL-E)
+   - `UNSPLASH_ACCESS_KEY` - Unsplash API key (optional)
 
 ### Backend Deployment Options
 
-#### Option 1: Vercel (Serverless)
+#### Option 1: Vercel (Serverless) ✅ Currently Deployed
 - Deploy backend as serverless functions
 - Configure environment variables in Vercel dashboard
 - **IMPORTANT**: Add `RESEND_API_KEY` for email functionality
