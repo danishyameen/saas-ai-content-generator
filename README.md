@@ -33,12 +33,13 @@ Genifai is a comprehensive AI-powered SaaS platform that helps businesses and in
 - **Enterprise Plan** - Unlimited AI requests for 90 days ($50/3 months)
 
 ### 🎨 Advanced Features
-- **AI Logo Generation** - Generate 4 logo options based on your brand name
-- **Image Generation/Upload** - AI-powered product image generation or manual upload
+- **AI Logo Generation** - Generate 4 logo options based on your brand name with PNG/JPG download
+- **Image Generation/Upload** - AI-powered product image generation with PNG/JPG download options
 - **Company Branding** - Manage company details, logo, and branding
 - **Request History** - Track all your AI generation history
 - **Affiliate Program** - Earn commissions by referring new users
 - **Admin Dashboard** - Comprehensive admin panel for platform management
+- **Download Options** - Download all generated images and logos in PNG or JPG format
 
 ### 🔐 Security & Authentication
 - Secure user authentication with JWT tokens
@@ -287,12 +288,23 @@ All generators use OpenAI's GPT models to create high-quality, contextual conten
 - Usage tracking and limits based on plan
 - Request history for all generations
 - Copy and download functionality
+- Real-time generation with loading states
 
 ### Image Generation System
 - **Primary**: OpenAI DALL-E 3 for AI image generation
 - **Fallback**: Unsplash API for high-quality stock images
 - **Upload**: Manual image upload support
 - **Multiple Options**: Generate 4 images per request
+- **Download Formats**: PNG and JPG download options for all images
+- **Hover Controls**: Dual download buttons appear on image hover
+
+### Logo Generation System
+- **AI-Powered**: Generate 4 unique logo options based on brand name
+- **Multiple Sources**: OpenAI DALL-E 3 + Unsplash API
+- **Download Formats**: PNG and JPG download options
+- **Interactive Selection**: Click to select from 4 generated options
+- **Hover Controls**: Dual download buttons (PNG - blue, JPG - green)
+- **Error Handling**: Robust fallback system ensures logos always generate
 
 ### Email System
 - **Production**: Resend API (works on Vercel)
@@ -402,24 +414,28 @@ This project is proprietary software. All rights reserved.
 
 ### Version 1.0.0 (April 2026)
 - Initial release
-- 7 AI content generators
-- User authentication and authorization
+- 7 AI content generators (Product, SEO, Ads, Business Ideas, Social, Competitor, Campaign)
+- User authentication and authorization with JWT
 - Subscription plans (Free: 10 requests/day, Pro: 100 requests/day, Enterprise: Unlimited)
-- Payment integration (Stripe, JazzCash)
+- Payment integration (Stripe, JazzCash) with manual approval workflow
 - Admin dashboard with full platform management
-- Affiliate program with referral tracking
-- PWA support with offline capabilities
-- Email OTP system with Resend API
-- Logo generation (4 AI-generated options)
-- Image generation with OpenAI and Unsplash fallback
+- Affiliate program with referral tracking and earnings
+- PWA support with offline capabilities and home screen installation
+- Email OTP system with Resend API for production
+- Logo generation (4 AI-generated options) with PNG/JPG download
+- Image generation with OpenAI DALL-E and Unsplash fallback
+- **Download Options**: All images and logos can be downloaded in PNG or JPG format
 - Beautiful animations with Framer Motion throughout all pages
 - Privacy Policy, Terms of Service, and Contact pages with working footer links
 - Contact page with business information and location image
-- Responsive design for all devices
-- Admin account with unlimited access
-- Manual payment approval workflow
-- Request history and usage tracking
-- Company branding management
+- Responsive design for all devices (mobile, tablet, desktop)
+- Admin account with unlimited access forever
+- Request history and usage tracking with daily reset
+- Company branding management with logo upload/generation
+- Enhanced error handling and user feedback with toast notifications
+- Secure password reset with OTP expiration (10 minutes)
+- Role-based access control (User/Admin)
+- Usage limits enforcement based on subscription plan
 
 ---
 
